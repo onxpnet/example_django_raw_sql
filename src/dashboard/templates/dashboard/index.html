@@ -1,3 +1,8 @@
 ini adalah dashboard
 
 <a href="/accounts/logout">Logout</a>
+
+<div>ID, NAMA, STATUS</div>
+{% for task in tasks %}
+<div>{{ task.id }}, {{ task.name }}, {{ task.status }}</div>
+{% endfor %}
