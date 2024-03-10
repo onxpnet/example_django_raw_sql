@@ -2,6 +2,9 @@ from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+id = 1
+query = f"SELECT id from tasks where id = {id}"
+
 # Function untuk execute query
 def execute_query(query, values=None):
     with connection.cursor() as cursor:
@@ -50,9 +53,9 @@ def dictfetchall(cursor):
 @login_required
 def index(request):
     # Insert value ke DB
-    # result = execute_query("INSERT INTO tasks VALUES (%s, %s, %s) RETURNING *", [3, "Contoh 3", False])
+    result = execute_query("INSERT INTO tasks VALUES (%s, %s, %s) RETURNING *", [5, "Contoh 5", True])
     # result = update_task(1, "Task Nomor satu", True)
-    result = execute_query("SELECT id, name, status FROM tasks")
+    # result = execute_query("SELECT id, name, status FROM tasks")
     # result = delete_task(1)
     print(result)
 
