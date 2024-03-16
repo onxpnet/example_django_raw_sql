@@ -19,7 +19,7 @@ services:
       PGUSER: postgres
       PGPASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
       PGDB: postgres
-      CSRF_TRUSTED_ORIGINS: django.mashanz.com
+      CSRF_TRUSTED_ORIGINS: https://django.mashanz.com
   nginx:
     container_name: nginx
     build:
