@@ -13,12 +13,13 @@ services:
       DEBUG: True
       PORT: 8000
       SECRET_KEY: secret
-      ALLOWED_HOSTS: 127.0.0.1,localhost
+      ALLOWED_HOSTS: 127.0.0.1,localhost,django.mashanz.com
       PGHOST: postgres
       PGPORT: 5432
       PGUSER: postgres
       PGPASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
       PGDB: postgres
+      CSRF_TRUSTED_ORIGINS: django.mashanz.com
   nginx:
     container_name: nginx
     build:

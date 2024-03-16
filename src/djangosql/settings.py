@@ -18,6 +18,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, ''),
     ALLOWED_HOSTS=(list, []),
+    CSRF_TRUSTED_ORIGINS=(list, []),
     PGHOST=(str, ''),
     PGPORT=(int, 5432),
     PGUSER=(str, ''),
@@ -41,7 +42,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-
+CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS')
 
 # Application definition
 
