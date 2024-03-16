@@ -1,5 +1,4 @@
 FROM python:3.12-slim-bookworm AS base
-# FROM gcr.io/distroless/python3-debian12:latest
 
 # install pdm dependencies
 RUN python -m pip install pdm --no-cache-dir
@@ -18,10 +17,8 @@ RUN chown -R nonroot /app/*whl
 USER nonroot
 RUN pip install *.whl --no-cache-dir --prefer-binary
 WORKDIR /home/nonroot/.local/lib/python3.12/site-packages/
+COPY src/manage.py .
+RUN python manage.py collectstatic
 RUN pip install granian
 EXPOSE 8000
 CMD ["python", "-m", "granian", "--host", "0.0.0.0", "--interface", "wsgi", "djangosql.wsgi:application"]
-
-# Runing docker images
-# docker run -e "SECRET_KEY=kunci_rahasia" -e "ALLOWED_HOSTS=*" -e "DEBUG=True" -p 8000:8000 django_sql
-# alternative docker-compose.yml -> docker compose up / docker compose restart

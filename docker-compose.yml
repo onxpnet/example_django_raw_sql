@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - /src/static:/home/nonroot/.local/lib/python3.12/site-packages/static
+    environment:
+      DEBUG: True
+      PORT: 8000
+      SECRET_KEY: secret
+      ALLOWED_HOSTS: 127.0.0.1,localhost
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
+      PGDB: postgres
+  nginx:
+    container_name: nginx
+    build:
+      context: ./docker
+      dockerfile: nginx.dockerfile
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./src/static:/var/www/html
+    depends_on:
+      - app
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
+      POSTGRES_HOST_AUTH_METHOD: "trust"
