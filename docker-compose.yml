@@ -10,16 +10,16 @@ services:
     volumes:
       - shared-volume:/home/nonroot/.local/lib/python3.12/site-packages/static
     environment:
-      DEBUG: False
-      PORT: 8000
-      SECRET_KEY: secret
-      ALLOWED_HOSTS: 127.0.0.1,localhost,django.mashanz.com
-      PGHOST: postgres
-      PGPORT: 5432
-      PGUSER: postgres
-      PGPASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
-      PGDB: postgres
-      CSRF_TRUSTED_ORIGINS: https://django.mashanz.com
+      DEBUG: $DEBUG
+      PORT: $PORT
+      SECRET_KEY: $SECRET_KEY
+      ALLOWED_HOSTS: $ALLOWED_HOSTS
+      PGHOST: $PGHOST
+      PGPORT: $PGPORT
+      PGUSER: $PGUSER
+      PGPASSWORD: $PGPASSWORD
+      PGDB: $PGDB
+      CSRF_TRUSTED_ORIGINS: $CSRF_TRUSTED_ORIGINS
   nginx:
     container_name: nginx
     build:
