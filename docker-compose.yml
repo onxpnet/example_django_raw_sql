@@ -8,9 +8,9 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - /src/static:/home/nonroot/.local/lib/python3.12/site-packages/static
+      - shared-volume:/home/nonroot/.local/lib/python3.12/site-packages/static
     environment:
-      DEBUG: True
+      DEBUG: False
       PORT: 8000
       SECRET_KEY: secret
       ALLOWED_HOSTS: 127.0.0.1,localhost,django.mashanz.com
@@ -30,7 +30,7 @@ services:
       - 80:80
     volumes:
       - ./docker/nginx.conf:/etc/nginx/conf.d/nginx.conf
-      - ./src/static:/var/www/html
+      - shared-volume:/home/nonroot/.local/lib/python3.12/site-packages/static
     depends_on:
       - app
   postgres:
@@ -42,3 +42,6 @@ services:
     environment:
       POSTGRES_PASSWORD: _iP0stgr3sP4ssw0rdXTr3m3lyL0ng
       POSTGRES_HOST_AUTH_METHOD: "trust"
+
+volumes:
+  shared-volume:

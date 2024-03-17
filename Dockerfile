@@ -19,6 +19,7 @@ RUN pip install *.whl --no-cache-dir --prefer-binary
 WORKDIR /home/nonroot/.local/lib/python3.12/site-packages/
 COPY src/manage.py .
 RUN python manage.py collectstatic
+RUN chmod +rwx -R static
 RUN pip install granian
 EXPOSE 8000
 CMD ["python", "-m", "granian", "--host", "0.0.0.0", "--interface", "wsgi", "djangosql.wsgi:application"]
